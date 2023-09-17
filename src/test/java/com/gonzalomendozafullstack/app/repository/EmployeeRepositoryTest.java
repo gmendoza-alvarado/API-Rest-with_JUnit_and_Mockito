@@ -3,6 +3,7 @@ package com.gonzalomendozafullstack.app.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,7 @@ public class EmployeeRepositoryTest {
 				.email("gmendoza.alvarado@hotmail.com")
 				.build();
 	}
+	
 	@Test
 	void testSaveEmployee() {
 		//given - dada o condicion previo o configuracion
@@ -61,7 +63,45 @@ public class EmployeeRepositoryTest {
 		
 		//then
 		assertThat(listEmployees).isNotNull();
-		assertThat(listEmployees.size()).isEqualTo(0);
+		assertThat(listEmployees.size()).isEqualTo(2);
 		
+	}
+	
+	@Test
+	void testGetEmployeeById() {
+		
+		employeeRepository.save(this.employee);
+		
+		//when
+		Employee employeeBD = employeeRepository.findById(this.employee.getId()).get();
+		
+		//then
+		assertThat(employeeBD).isNotNull();
+		
+	}
+	
+	@Test
+	void testUpdateEmployee() {
+		employeeRepository.save(this.employee);
+
+		Employee saveEmployee = employeeRepository.findById(employee.getId()).get();
+		saveEmployee.setEmail("Fernanda@hotmail.com");
+		saveEmployee.setName("Fernanda");
+		
+		employeeRepository.save(saveEmployee);
+		
+		assertThat(saveEmployee.getEmail()).isEqualTo("Fernanda@hotmail.com");
+	}
+	
+	@Test
+	void testDeleteEmployee() {
+		employeeRepository.save(this.employee);
+		
+		employeeRepository.deleteById(employee.getId());
+		
+		Optional<Employee> deleteEmployee = employeeRepository.findById(employee.getId());
+		
+		assertThat(deleteEmployee).isEmpty();
+
 	}
 }
