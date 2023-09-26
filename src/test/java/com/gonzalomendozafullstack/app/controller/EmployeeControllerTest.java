@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -25,7 +26,7 @@ import com.gonzalomendozafullstack.app.model.Employee;
 import com.gonzalomendozafullstack.app.service.EmployeeService;
 
 @WebMvcTest
-public class EmployeeControllerTest {
+class EmployeeControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -47,6 +48,7 @@ public class EmployeeControllerTest {
 				.surName("Mendoza")
 				.email("gmendoza.alvarado@hotmail.com")
 				.build();
+				
 		
 		given(employeeService.saveEmployee(any(Employee.class)))
 		.willAnswer((invocation) -> invocation.getArgument(0));

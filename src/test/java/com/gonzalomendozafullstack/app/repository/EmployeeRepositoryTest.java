@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import com.gonzalomendozafullstack.app.model.Employee;
 
 @DataJpaTest //COMPONENETES DE LA CAPA DE PERSISTENCIA (SOLO ENTITY, REPOSITORIO)
-public class EmployeeRepositoryTest {
+class EmployeeRepositoryTest {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -103,5 +103,16 @@ public class EmployeeRepositoryTest {
 		
 		assertThat(deleteEmployee).isEmpty();
 
+	}
+	
+	@Test
+	public final void testToString() {
+		String s = Employee.builder()
+				.name("Fernanda")
+				.surName("Salas")
+				.email("gmendoza.alvarado@hotmail.com")
+				.toString();
+		
+		assertThat(s).isNotEmpty();
 	}
 }

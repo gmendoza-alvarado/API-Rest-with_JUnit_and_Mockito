@@ -25,7 +25,7 @@ import com.gonzalomendozafullstack.app.model.Employee;
 import com.gonzalomendozafullstack.app.repository.EmployeeRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeServiceTest {
+class EmployeeServiceTest {
 	
 	@Mock
 	EmployeeRepository employeeRepository;
